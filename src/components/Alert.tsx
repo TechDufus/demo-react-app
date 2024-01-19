@@ -1,10 +1,26 @@
 interface Props {
-    children: React.ReactNode;
+    text: React.ReactNode;
+    alertType?: 'primary' | 'success' | 'warning' | 'danger';
+    onClose: () => void;
 }
 
-const Alert = ({ children }: Props) => {
+const Alert = ({
+    text,
+    alertType = 'primary',
+    onClose
+}: Props) => {
+    const alertClass = `alert alert-${alertType} alert-dismissible fade show`;
     return (
-        <div className="alert alert-primary">{children}</div>
+        <div className={alertClass}>
+            {text}
+            <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+                onClick={onClose}
+            ></button>
+        </div>
     )
 }
 
